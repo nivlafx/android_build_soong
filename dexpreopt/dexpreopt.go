@@ -486,6 +486,10 @@ func dexpreoptCommand(ctx android.PathContext, globalSoong *GlobalSoongConfig, g
 		cmd.FlagWithInput("--profile-file=", profile)
 	}
 
+	if global.EnableUffdGc {
+		cmd.Flag("--runtime-arg").Flag("-Xgc:CMC")
+	}
+
 	rule.Install(odexPath, odexInstallPath)
 	rule.Install(vdexPath, vdexInstallPath)
 }
